@@ -1,0 +1,13 @@
+Step 1: Store your image what you want to remove object in this folder.
+
+Step 2: Open this folder with an editor such as VScode.
+
+Step 3: Open terminal and direct to this folder
+
+Step 4: Use the following command:
+    
+        python main.py -s <the path to your image> -b [<the size of brush that you want>]
+
+    Use python main.py -h for help.
+
+Step 5: Press s and wait for this process.

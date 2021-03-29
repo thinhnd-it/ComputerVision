@@ -1,0 +1,13 @@
+Step 1: Store your images what you want to add object in this folder.
+
+Step 2: Open this folder with an editor such as VScode.
+
+Step 3: Open terminal and direct to this folder
+
+Step 4: Use the following command:
+    
+        python main.py -s <the path to your object> -t <the path to your target> -m [<the path to a mask image with the object in white and other part in black, ignore this option if you plan to draw it later>] 
+
+    Use python main.py -h for help.
+
+Step 5: Press s after any substep of step 4 and wait for this process.
