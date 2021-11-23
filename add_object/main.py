@@ -16,7 +16,9 @@ def usage():
     \t-h\tPrint a brief help message and exits..\n\
     \t-s\t(Required) Specify a source image.\n\
     \t-t\t(Required) Specify a target image.\n\
-    \t-m\t(Optional) Specify a mask image with the object in white and other part in black, ignore this option if you plan to draw it later.")
+    \t-m\t(Optional) Specify a mask image with the object in white and other part in black, ignore this option if you plan to draw it later.\n\
+    \t-b\t(Optional) Specify size of brush.\n\
+    ")
 
 
 if __name__ == '__main__':
@@ -24,7 +26,7 @@ if __name__ == '__main__':
     args = {}
 
     try:
-        opts, _ = getopt.getopt(sys.argv[1:], "hs:t:m:p:")
+        opts, _ = getopt.getopt(sys.argv[1:], "hs:t:m:b:p:")
     except getopt.GetoptError as err:
         # print help information and exit:
         print(err)  # will print something like "option -a not recognized"
@@ -40,6 +42,8 @@ if __name__ == '__main__':
             args["target"] = a
         elif o in ("-m"):
             args["mask"] = a
+        elif o in ("-b"):
+            args["brush-size"] = a
         else:
             assert False, "unhandled option"
 
@@ -63,9 +67,15 @@ if __name__ == '__main__':
     # draw the mask
     mask_path = ""
     if "mask" not in args:
-        print('Please highlight the object to disapparate.\n')
-        mp = MaskPainter(args["source"])
-        mask_path = mp.paint_mask()
+        if "brush-size" in args:
+            print('Please highlight the object to disapparate.\n')
+            mp = MaskPainter(args["source"])
+            mp.setBrushSize(int(args['brush_size']))
+            mask_path = mp.paint_mask()
+        else:
+            print('Please highlight the object to disapparate.\n')
+            mp = MaskPainter(args["source"])
+            mask_path = mp.paint_mask()
     else:
         mask_path = args["mask"]
 

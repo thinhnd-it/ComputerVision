@@ -12,10 +12,13 @@ class MaskPainter():
 
         self.mask = np.zeros(self.image.shape)
         self.mask_copy = self.mask.copy()
-        self.size = 4
+        self.size = 10
         self.to_draw = False
 
         self.window_name = "Draw mask. s:save; r:reset; q:quit"
+    
+    def setBrushSize(self, size):
+        self.size = size
 
     def _paint_mask_handler(self, event, x, y, flags, param):
         if event == cv2.EVENT_LBUTTONDOWN:
@@ -23,9 +26,9 @@ class MaskPainter():
 
         elif event == cv2.EVENT_MOUSEMOVE:
             if self.to_draw:
-                cv2.circle(self.image, (x, y), 7,
+                cv2.circle(self.image, (x, y), self.size,
                            (0, 0, 255), -1)
-                cv2.circle(self.mask, (x, y), 7,
+                cv2.circle(self.mask, (x, y), self.size,
                            (255, 255, 255), -1)
                 cv2.imshow(self.window_name, self.image)
 
